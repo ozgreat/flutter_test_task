@@ -9,22 +9,27 @@ class ColorChanger extends StatefulWidget {
 }
 
 class _ColorChangerState extends State<ColorChanger> {
-  int _colorCount = 0;
+  /// Default color
+  Color __currentColor = Colors.red;
 
-  void _changeColor() {
-    var colors = Colors.primaries;
-    var rand = new Random();
-    setState(() {
-      _colorCount = rand.nextInt(colors.length);
-    });
-  }
+  /// List of colors
+  List<Color> __colors = Colors.primaries;
+
+  ///Len of __colors
+  int __colorsLen = Colors.primaries.length;
+
+  ///Random
+  Random __rand = new Random();
+
+  void __changeColor() =>
+      setState(() => __currentColor = __colors[__rand.nextInt(__colorsLen)]);
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: _changeColor,
+      onTap: __changeColor,
       child: Container(
-        color: Colors.primaries[_colorCount],
+        color: __currentColor,
         child: Center(
           child: Text(
             'Hey there',
